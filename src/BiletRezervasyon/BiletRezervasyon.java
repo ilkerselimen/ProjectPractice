@@ -55,7 +55,7 @@ public class BiletRezervasyon {
                 System.out.println("Hatalı giriş yaptınız!");
             }
 
-        }while();
+        }while(true);
     }
 
 }
