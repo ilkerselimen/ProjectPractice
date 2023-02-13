@@ -1,32 +1,51 @@
 package AracSigortaApp;
 
-public class Arac {
+import java.util.Scanner;
 
-    //Arac ortak ozelliklerini tasiyan class
-    //arac tipi, arac primi
-    public String type; //field veya feature veya ozellik diyoruz bu degiskenlere
+public class Arac {
+    //tipi,prim
+    public String type;//field/feature/özellik
     public int prim;
 
     public void countPrim(int term){
-        switch (this.type){ //this, buclasstan olusturulmus object'sinin type degiskenine bak
+        switch(this.type){
             case "otomobil":
-                this.prim = term==1 ? 2000 : 2500; //ternary kullandik
+                this.prim=term==1 ? 2000 : 2500;
                 break;
             case "kamyon":
-                this.prim = term==1 ? 3000 : 3500;
+                this.prim=term==1 ? 3000 : 3500;
                 break;
             case "motosiklet":
-                this.prim = term==1 ? 1500 : 1750;
+                this.prim=term==1 ? 1500 : 1750;
                 break;
-            case "otobus":
-                countPrimBus();
+            case "otobüs":
+                countPrimBus(term);
                 break;
+            default:
+                System.out.println("Hatalı giriş!!!");
+                this.prim=0;
+                break;
+
         }
     }
 
-    private void countPrimBus(){ //sadece otobuse ozel prim hesaplama methodu
-
+    private void countPrimBus(int term){
+        Scanner inp=new Scanner(System.in);
+        System.out.println("Otobüs tipini giriniz:");
+        System.out.println("1.18-30 koltuk");
+        System.out.println("2.30 koltuk veya üstü");
+        int busType=inp.nextInt();
+        switch (busType){
+            case 1:
+                this.prim=term==1 ? 4000 : 4500;
+                break;
+            case 2:
+                this.prim=term==1 ? 5000 : 5500;
+                break;
+            default:
+                System.out.println("Hatalı giriş!!!");
+                this.prim=0;
+                break;
+        }
     }
-
-
 }
