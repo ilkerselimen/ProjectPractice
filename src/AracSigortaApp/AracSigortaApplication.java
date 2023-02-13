@@ -40,14 +40,41 @@ public class AracSigortaApplication {
             inp.nextLine();
             //girilen dönem geçerli mi?
             if(term==1 || term==2){
-
+                Arac arac=new Arac();
+                String termName=term==1 ? "Haziran 2022" : "Aralık 2022";
+                System.out.println("Araç tipini giriniz:");
+                System.out.println("(otomobil, kamyon, otobüs, motosiklet)");
+                String select=inp.next();//kamyon
+                arac.type=select;
+                arac.countPrim(term);
+                if(arac.prim>0) {
+                    System.out.println("Hesaplama işlemi başarıyla tamamlandı.");
+                    //sonucu yazdır
+                    System.out.println("Araç tipi: " + arac.type);
+                    System.out.println("Tarife dönemi: " + termName);
+                    System.out.println("Aracınızın ilgili dönem sigorta primi:" + arac.prim);
+                    isFail = isAgain(inp);
+                }else{
+                    System.out.println("Hesaplama başarısız, tekrar deneyiniz!!!");
+                    isFail = isAgain(inp);
+                }
             }else{
                 System.out.println("Hatalı giriş!!!");
                 isFail=true;
             }
 
         }while(isFail);
+        System.out.println("İyi günler dileriz...");
+    }
 
-
+    private static boolean isAgain(Scanner inp) {
+        boolean isFail;
+        System.out.println("Yeni işlem için 1, çıkış için 0 veya her hangi bir sayı giriniz:");
+        int choice = inp.nextInt();
+        if (choice == 1)
+            isFail = true;
+        else
+            isFail = false;
+        return isFail;
     }
 }
