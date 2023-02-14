@@ -1,4 +1,7 @@
 package LoginpageApp;
+
+import java.util.Scanner;
+
 /*
 
 Project: Bir siteye üye olma ve giriş yapma sayfası tasarlayınız.
@@ -26,6 +29,34 @@ Project: Bir siteye üye olma ve giriş yapma sayfası tasarlayınız.
                             : en az bir tane sembol içermeli
  */
 public class LoginPageApp {
-
-
+    public static void main(String[] args) {
+        start();
+    }
+    public static void start(){
+        Scanner inp=new Scanner(System.in);
+//1-kullanıcıya işlem menüsü gösterelim.
+        int select;
+        do {
+            System.out.println("=== TECHPROEDUCATION ===");
+            System.out.println("1-üye ol");
+            System.out.println("2-giriş yap");
+            System.out.println("0-ÇIKIŞ");
+            select= inp.nextInt();
+            switch (select){
+                case 1:
+                    //register
+                    break;
+                case 2:
+                    //login
+                    break;
+                case 0:
+                    System.out.println("İyi günler dileriz...");
+                    break;
+                default:
+                    System.out.println("Hatalı giriş yaptınız, tekrar deneyiniz!");
+                    break;
+            }
+        }while (select!=0);
+//2-tüm userların ortak özellikleri olacak, user classı oluşturalım.
+    }
 }
