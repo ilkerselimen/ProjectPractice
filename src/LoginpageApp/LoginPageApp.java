@@ -59,4 +59,33 @@ public class LoginPageApp {
         }while (select!=0);
 //2-tüm userların ortak özellikleri olacak, user classı oluşturalım.
     }
+
+    private static boolean validatePassword(String password){//ASdf12*-
+        boolean isValid;
+        boolean isExistsSpace=password.contains(" ");
+        boolean isLengthGtSix=password.length()>=6;
+        boolean isExistUpperLetter=password.replaceAll("[^A-Z]","").length()>0;//AS
+        boolean isExistLowerLetter=password.replaceAll("[^a-z]","").length()>0;//df
+        boolean isExistsDigit=password.replaceAll("[\\D]","").length()>0;//12
+        boolean isExistsSymbol=password.replaceAll("[\\P{Punct}]","").length()>0;
+        if(isExistsSpace){
+            System.out.println("Şifre boşluk içeremez.");
+        }else if(!isLengthGtSix){
+            System.out.println("Şifre en az 6 karakter içermelidir.");
+        } else if (!isExistUpperLetter) {
+            System.out.println("Şifre en az 1 tane büyük harf içermelidir.");
+        } else if (!isExistLowerLetter) {
+            System.out.println("Şifre en az 1 tane küçük harf içermelidir.");
+        } else if(!isExistsDigit){
+            System.out.println("Şifre en az 1 tane rakam içermelidir.");
+        } else if (!isExistsSymbol) {
+            System.out.println("Şifre en az 1 tane sembol içermelidir.");
+        }
+        isValid=!isExistsSpace && isExistUpperLetter && isExistLowerLetter && isExistsDigit && isExistsSymbol;
+        if (!isValid){
+            System.out.println("Geçersiz şifre, tekrar deneyiniz.");
+        }
+        return isValid;
+    }
+
 }
