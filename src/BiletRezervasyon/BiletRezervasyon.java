@@ -27,9 +27,12 @@ public class BiletRezervasyon {
         Bus bus=new Bus("34 ASD 78");//"1","2"....
         //4-bilet objesi oluşturalım.
         Bilet bilet=new Bilet();
+
+        start(bus,bilet);
     }
-    public static void start(Bus bus){
+    public static void start(Bus bus, Bilet bilet){
         Scanner scan=new Scanner(System.in);
+        int select;
         do {
             //6-kullanıcıdan bilgileri alalım.
             System.out.println("Bilet Rezervasyon Sistemine Hoşgeldiniz...");
@@ -51,11 +54,42 @@ public class BiletRezervasyon {
             boolean check=type==1 || type==2;
             if(distance>0 && age>0 && check){
                 //9-bilet fiyatını hesaplayalım
+                bilet.distance = distance;
+                bilet.typeNo = type;
+                bilet.seatNo = seat;
+                bilet.price = getTotal(bilet,age);
+                System.out.println("------------------------------");
+                bilet.printBilet(bus);
             }else{
                 System.out.println("Hatalı giriş yaptınız!");
             }
+            System.out.println("Yeni işlem için herhangi bir sayı, çıkış için 0 giriniz:");
+            select = scan.nextInt();
+        }while(select!=0);
+    }
 
-        }while(true);
+    private static double getTotal(Bilet bilet,int age){
+        double dist = bilet.distance;
+        int type = bilet.typeNo;
+        int seat = bilet.seatNo;
+        double total = 0;
+        switch (type){
+            case 1:
+                total=seat%3==0?dist*1.2:dist;
+                break;
+            case 2:
+                total=seat%3==0?dist*2.4:dist*2;
+                break;
+        }
+        if (age<12){
+            total *= 0.5;
+        }else if (age<25){
+            total *= 0.9;
+        }else if (age>65){
+            total *= 0.7;
+        }
+
+        return total;
     }
 
 }
