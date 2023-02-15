@@ -91,7 +91,16 @@ public class UserService {
         String name=inp.nextLine();
 //10-username unique/eşsiz olmalı
         String username=getUserName();
-        //11-
+//11-email unique, geçerli olmalı
+        String email=getEmail();
+//12-password :geçerli olmalı
+        String password=getPassword();
+//13-user objesi oluşturalım
+        User user=new User(name,username,email,password);
+//14-user ı listeye kaydedelim.
+        this.userList.add(user);
+        System.out.println("Tebrikler işleminiz başarıyla gerçekleştirildi.");
+        System.out.println("Kullanıcı adı (veya email) ve şifrenizle sisteme giriş yapabilirsiniz.");
     }
 
     //10-a-kullanıcıdan userName alma
@@ -100,13 +109,68 @@ public class UserService {
         boolean existsUsername;
         do {
             System.out.println("Kullanıcı adı giriniz:");
-            username = inp.next();
+            username = inp.nextLine();//bu username daha önce kullanılmış mı?
             existsUsername=getUser(username)!=null;
             if (existsUsername){
                 System.out.println("Bu username kullanılmış,farklı bir username deneyiniz.");
             }
         }while(existsUsername);
         return username;
+    }
+    //11-a-kullanıcıdan email alma
+    private String getEmail(){
+        String email;
+        boolean isValid;
+        boolean existsEmail;
+        do {
+            System.out.println("Email giriniz:");
+            email=inp.nextLine();//email geçerli mi :validation
+            isValid=validateEmail(email);//geçerli ise unique mi
+            existsEmail=getUser(email)!=null;
+            if (existsEmail){
+                System.out.println("Bu email zaten kayıtlı, farklı bir email deneyiniz.");
+                isValid=false;
+            }
+        }while(!isValid);
+        return email;
+    }
+    //12-a-password oluşturma
+    private String getPassword(){
+        String passw;
+        boolean isValidPass;
+        do {
+            System.out.println("Şifrenizi giriniz:");
+            passw=inp.nextLine();//geçerli mi
+            isValidPass=validatePassword(passw);
+        }while (!isValidPass);
+        return passw;
+    }
+
+    //15-email veya username ile giriş yapma
+    public void login(){
+        System.out.println("Kullanıcı adı veya email giriniz:");
+        String userNameOrEmail=inp.nextLine();
+        //16-girilen değer ile user ı bulma
+        if (getUser(userNameOrEmail)!=null) {
+            User user = getUser(userNameOrEmail);
+            //17-user bulundu ise şifre kontrolü
+            boolean isWrong=true;
+            while (isWrong){
+                System.out.println("Şifrenizi girinz:");
+                String password=inp.nextLine();
+                //girilen şifre bulduğumuz userın şifresi ile mi aynı mı
+                if (user.getPassword().equals(password)){
+                    System.out.println("Sisteme giriş yaptınız.");
+                    isWrong=false;
+                }else {
+                    System.out.println("Şifreniz yanlış, tekrar deneyiniz.");
+                }
+            }
+
+        }else{
+            System.out.println("Sistemde kayıtlı kullanıcı adı veya email bulunamadı.");
+            System.out.println("Üyeyseniz bilgilerinizi kontrol ederek tekrar deneyiniz, üye değilseniz lütfen üye olunuz.");
+        }
     }
 
 }

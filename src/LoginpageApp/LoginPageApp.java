@@ -34,6 +34,7 @@ public class LoginPageApp {
     }
     public static void start(){
         Scanner inp=new Scanner(System.in);
+        UserService service=new UserService();
 //1-kullanıcıya işlem menüsü gösterelim.
         int select;
         do {
@@ -45,9 +46,12 @@ public class LoginPageApp {
             switch (select){
                 case 1:
                     //register
+                    service.register();
+                    System.out.println(service.userList);
                     break;
                 case 2:
                     //login
+                    service.login();
                     break;
                 case 0:
                     System.out.println("İyi günler dileriz...");
