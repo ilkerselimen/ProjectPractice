@@ -1,5 +1,4 @@
 package RestaurantBillGenerator;
-
 /*
 Proje: Restaurant Fiş Üretme Uygulaması(BillGenerator)
        1-Bir restaurantın online sipariş sisteminde hesabı
@@ -20,6 +19,55 @@ Proje: Restaurant Fiş Üretme Uygulaması(BillGenerator)
          Hesap oluşturma: Tutarları ile birlikte tüm siparişleri ve
                           toplam tutarı gösteren bir hesap fişi yazdırılsın.
 */
+import java.util.Scanner;
 
 public class RestaurantBillGenerator {
+    public static void main(String[] args) {
+        getSelectionMenu();
+    }
+    //1-işlem seçimi için menü gösterelim
+    public static void getSelectionMenu(){
+        Scanner inp=new Scanner(System.in);
+        DishService dishService=new DishService();//listede 10 tane dish var.
+
+        //2-menü tekrar tekrar gösterilsin
+        //3-yiyecekler için class oluştur
+        //7-sipariş için class oluştur
+        int select=1;
+        while(select!=0){
+            System.out.println("-----------------------------------------------");
+            System.out.println(" *** Lezzet Restaurant Sipariş Uygulaması ***");
+            System.out.println("1-Menü");
+            System.out.println("2-Sipariş gir");
+            System.out.println("3-Siparişi iptal et");
+            System.out.println("4-Hesap oluştur");
+            System.out.println("0-ÇIKIŞ");
+            System.out.println("Seçiminiz: ");
+            select=inp.nextInt();
+            System.out.println("-----------------------------------------------");
+            switch (select){
+                case 1:
+                    //menü göster
+                    dishService.showMenu();
+                    break;
+                case 2:
+                    //sipariş oluştur
+                    break;
+                case 3:
+                    //sipariş iptal
+                    break;
+                case 4:
+                    //hesap
+                    break;
+                case 0:
+                    System.out.println("İyi günler...");
+                    break;
+                default:
+                    System.out.println("Hatalı giriş!");
+                    break;
+            }
+        }
+
+    }
 }
+
