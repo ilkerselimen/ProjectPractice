@@ -1,5 +1,6 @@
 package RestaurantBillGenerator;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,6 @@ public class DishService {
         this.dishList.add(dish8);
         this.dishList.add(dish9);
         this.dishList.add(dish10);
-
     }
     //6-yemek menüsü gösterme
     public void showMenu(){
@@ -39,6 +39,21 @@ public class DishService {
         for (Dish dish:this.dishList){
             System.out.printf("%-3s    %-20s   %-6s Lira\n",dish.getCode(),dish.getName(),dish.getPrice());
         }
+    }
+
+    //12:code ile dish bulma
+    public Dish findByDishCode(int code){
+        if(code==0){
+            System.out.println("Ana menüye yönlendiriliyorsunuz.");
+        }else{
+            for(Dish dish:this.dishList){
+                if(dish.getCode()==code){
+                    return  dish;
+                }
+            }
+            System.out.println("Ürün bulunamadı.");
+        }
+        return null;
     }
 
 
