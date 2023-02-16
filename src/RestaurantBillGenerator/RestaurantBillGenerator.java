@@ -19,6 +19,7 @@ Proje: Restaurant Fiş Üretme Uygulaması(BillGenerator)
          Hesap oluşturma: Tutarları ile birlikte tüm siparişleri ve
                           toplam tutarı gösteren bir hesap fişi yazdırılsın.
 */
+
 import java.util.Scanner;
 
 public class RestaurantBillGenerator {
@@ -29,6 +30,7 @@ public class RestaurantBillGenerator {
     public static void getSelectionMenu(){
         Scanner inp=new Scanner(System.in);
         DishService dishService=new DishService();//listede 10 tane dish var.
+        OrderService orderService=new OrderService();
 
         //2-menü tekrar tekrar gösterilsin
         //3-yiyecekler için class oluştur
@@ -52,12 +54,15 @@ public class RestaurantBillGenerator {
                     break;
                 case 2:
                     //sipariş oluştur
+                    orderService.createOrder(dishService);
                     break;
                 case 3:
                     //sipariş iptal
+                    orderService.deleteOrder();
                     break;
                 case 4:
                     //hesap
+                    orderService.printBill();
                     break;
                 case 0:
                     System.out.println("İyi günler...");
