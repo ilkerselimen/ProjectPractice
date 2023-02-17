@@ -3,11 +3,11 @@ package MiniBookStore;
 public class Book extends Product{
 
     private String authorName;
-    private  String publisher;
+    private String publisher;
     private String isbn;
 
     public Book(String name, String price, int stock, String authorName, String publisher, String isbn) {
-        super(name, price, stock);
+        super(name, price, stock);//->new Product(name,price,stock)
         this.authorName = authorName;
         this.publisher = publisher;
         this.isbn = isbn;
